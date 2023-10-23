@@ -18,7 +18,8 @@ export default function Profile() {
                   戸塚翔太 / Totsumaru
                 </h3>
                 <a
-                  className="rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                  href="/edit/profile"
+                  className="rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:cursor-pointer">
                   Edit
                 </a>
               </div>

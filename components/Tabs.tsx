@@ -1,6 +1,6 @@
 const tabs = [
   { name: "概要", href: '#', current: true },
-  { name: "画像", href: '#', current: false },
+  // { name: "画像", href: '#', current: false },
 ]
 
 function classNames(...classes: any) {

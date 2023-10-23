@@ -11,6 +11,10 @@ Goを専業とするエンジニアです。
 
 ## h2です
 
+[hello](https://google.com)
+aタグです: https://google.com
+![img](https://media.discordapp.net/attachments/1112319028225130607/1165946918967455754/atari.png?ex=6548b3af&is=65363eaf&hm=5c5b6a62c63f0447d38ea5f89447d836000697363794409afaf55d5dfb06505a&=&width=2020&height=1136)
+
 ### h3です
 
 a
@@ -20,12 +24,12 @@ a
 - list1
 - list2
   - list3
-- list4
 
 pです
 
-1行明けたPです
-したのPです
+|hello|foo|
+|---|---|
+|a|b|
 `;
 
 export default function About() {
@@ -54,6 +58,46 @@ export default function About() {
               <li className={`${isNested ? 'mt-0' : 'mt-3'}`} {...props} />
             );
           },
+          a: ({ node, ...props }) => (
+            <a
+              {...props}
+              className="text-blue-600 hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            />
+          ),
+          img: ({ src, alt }) => {
+            // altタグに基づいてスタイルを変更
+            const isHalf = alt?.includes("#half");
+            const cleanAlt = alt?.replace("#half", ""); // 実際のaltテキストを取得
+
+            return (
+              <img
+                src={src}
+                alt={cleanAlt}
+                className={isHalf ? "w-1/2 mt-3" : "w-full mt-3"}
+              />
+            );
+          },
+          table: ({ node, ...props }) => (
+            <table className="min-w-full divide-y divide-gray-300 border border-gray-300" {...props} />
+          ),
+          thead: ({ node, ...props }) => (
+            <thead className="bg-gray-50" {...props} />
+          ),
+          tbody: ({ node, ...props }) => (
+            <tbody className="bg-white divide-y divide-gray-200" {...props} />
+          ),
+          tr: ({ node, ...props }) => (
+            <tr {...props} />
+          ),
+          th: ({ node, ...props }) => (
+            <th scope="col"
+                className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6" {...props} />
+          ),
+          td: ({ node, ...props }) => (
+            <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-500 sm:pl-6" {...props} />
+          ),
         }}
       >
         {markdownText}

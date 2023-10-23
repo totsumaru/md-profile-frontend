@@ -2,8 +2,8 @@ import SnsIcon from "@/components/SnsIcon";
 
 export default function Profile() {
   return (
-    <div className="bg-white py-24 md:py-32">
-      <div className="mx-auto max-w-7xl grid-cols-1 gap-x-8 gap-y-20 px-6 lg:px-8 xl:grid-cols-5">
+    <div className="bg-white py-12 md:py-12">
+      <div className="mx-auto max-w-7xl grid-cols-1 gap-x-8 gap-y-20 xl:grid-cols-5">
         <ul role="list" className="-mt-12 space-y-12 divide-y divide-gray-200 xl:col-span-3">
           <div className="flex flex-col gap-10 pt-12 sm:flex-row">
             {/* アイコン */}

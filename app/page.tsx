@@ -1,4 +1,5 @@
-import Profile from "@/components/profile";
+import Profile from "@/components/Profile";
+import About from "@/components/About";
 
 export default function Home() {
   return (
@@ -7,6 +8,12 @@ export default function Home() {
         <div className="mx-auto max-w-3xl">
           {/* この中にコードを書く */}
           <Profile/>
+
+          {/* About */}
+          <div className="bg-amber-50 w-full">
+            <About/>
+          </div>
+
         </div>
       </div>
     </main>

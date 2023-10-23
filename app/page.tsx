@@ -1,12 +1,14 @@
 import Profile from "@/components/Profile";
 import About from "@/components/About";
+import Tabs from "@/components/Tabs";
 
 export default function Home() {
   return (
     <main className="">
       {/* プロフィール */}
-      <div className="bg-white mt-3 mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div className="bg-white mt-10 mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <Profile/>
+        <Tabs/>
       </div>
 
       {/* コンテンツ */}

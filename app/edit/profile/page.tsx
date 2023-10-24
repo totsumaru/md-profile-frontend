@@ -4,10 +4,10 @@ import React, { ChangeEvent, useRef, useState } from 'react';
 import EditTab from "@/components/tab/EditTab";
 
 export default function Index() {
-  // 画像のURLを保存するためのステート
-  const [image, setImage] = useState("https://pbs.twimg.com/profile_images/1647910051414429696/PzPDwwmk_400x400.jpg");
-
+  const imageUrl = "https://pbs.twimg.com/profile_images/1647910051414429696/PzPDwwmk_400x400.jpg"
   const slug = "totsumaru"
+
+  const [image, setImage] = useState(imageUrl);
 
   // input要素への参照
   const inputRef = useRef<HTMLInputElement>(null);
@@ -62,7 +62,8 @@ export default function Index() {
           </label>
           <input
             type="text"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500
+             focus:border-blue-500 block w-full p-2.5"
             placeholder="表示名を入力" required
           />
         </div>
@@ -73,7 +74,8 @@ export default function Index() {
             自己紹介
           </label>
           <textarea
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500
+             focus:border-blue-500 block w-full p-2.5"
             rows={5}
             placeholder="自己紹介を入力"
             required
@@ -82,14 +84,27 @@ export default function Index() {
 
         {/* 公開ページのURL */}
         <div className="mb-6">
-          <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+          <label htmlFor="publicUrlPath" className="block mb-2 text-sm font-medium text-gray-900">
             公開ページのURL
           </label>
-          <input
-            type="text"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="表示名を入力" required
-          />
+          {/* フォーム */}
+          <div
+            className="flex items-center border border-gray-300 rounded-lg overflow-hidden">
+            <span
+              className="inline-block px-2.5 text-gray-900 text-sm border-gray-300">
+              https://hello.com/me/
+            </span>
+            <input
+              type="text"
+              id="publicUrlPath"
+              className="flex-1 bg-gray-50 border-l text-gray-900 text-sm focus:ring-blue-500
+               focus:border-blue-500 w-full p-2.5 dark:bg-gray-700"
+              placeholder="URLとなる文字列を指定"
+              required
+              pattern="^[a-zA-Z0-9_-]+$"
+              title="英数字、ハイフン、アンダースコアのみが使用できます。"
+            />
+          </div>
         </div>
 
         {/* Twitter/X */}

@@ -1,4 +1,5 @@
 import SnsIcon from "@/components/SnsIcon";
+import { ArrowUpOnSquareIcon, PencilIcon } from "@heroicons/react/24/outline";
 
 export default function Profile() {
   return (
@@ -14,14 +15,21 @@ export default function Profile() {
 
               {/* 名前 */}
               <div className="flex justify-between items-center">
-                <h3 className="text-xl font-bold leading-8 tracking-tight text-gray-900">
+                <h3 className="mr-3 text-xl font-bold leading-8 tracking-tight text-gray-900">
                   戸塚翔太 / Totsumaru
                 </h3>
-                <a
-                  href="/edit/profile"
-                  className="rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:cursor-pointer">
-                  Edit
-                </a>
+                <div className="w-fit flex gap-1">
+                  <a
+                    href="/edit/profile"
+                    className="block w-fit rounded-md bg-white px-2 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:cursor-pointer">
+                    <PencilIcon className="h-5 w-5"/>
+                  </a>
+                  <a
+                    href="/edit/share"
+                    className="block w-fit rounded-md bg-white px-2 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:cursor-pointer">
+                    <ArrowUpOnSquareIcon className="h-5 w-5"/>
+                  </a>
+                </div>
               </div>
 
               {/* 説明 */}

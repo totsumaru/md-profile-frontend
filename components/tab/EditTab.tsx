@@ -3,10 +3,11 @@ import { classNames } from "@/utils/classNames";
 const tabs = [
   { name: "プロフィール", href: '/edit/profile', id: "profile" },
   { name: "概要", href: '/edit/about', id: "about" },
+  { name: "公開設定", href: '/edit/share', id: "share" },
 ]
 
 type Props = {
-  current: "profile" | "about"
+  current: "profile" | "about" | "share"
 }
 
 export default function EditTab({ current }: Props) {

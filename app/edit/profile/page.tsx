@@ -1,28 +1,36 @@
-"use client"
-
 import React from 'react';
 import EditTab from "@/components/tab/EditTab";
 import ProfileClient from "@/app/edit/profile/ProfileClient";
-import { SampleData } from "@/utils/sample";
+import { ProfileBackend } from "@/utils/api/api";
+import { GetFindByAccessToken } from "@/utils/api/getFindByAccessToken";
 
 export const dynamic = 'force-dynamic'
 
 /**
  * プロフィールの編集ページです
  */
-export default function Index() {
+export default async function Index() {
+  const token = "token-hello"
+
+  let profile: ProfileBackend | undefined
+  try {
+    profile = await GetFindByAccessToken({ accessToken: token })
+  } catch (e) {
+    console.error("データを取得できません", e)
+  }
+
   return (
     <>
       <EditTab current={"profile"}/>
       <ProfileClient
-        imageUrl={SampleData.imageUrl}
-        displayName={SampleData.displayName}
-        introduction={SampleData.introduction}
-        slug={SampleData.slug}
-        x={SampleData.x}
-        instagram={SampleData.instagram}
-        github={SampleData.github}
-        website={SampleData.website}
+        imageUrl={profile?.avatar || ""}
+        displayName={profile?.display_name || ""}
+        introduction={profile?.introduction || ""}
+        slug={profile?.slug || ""}
+        x={profile?.x || ""}
+        instagram={profile?.instagram || ""}
+        github={profile?.github || ""}
+        website={profile?.website || ""}
       />
     </>
   )

@@ -1,5 +1,5 @@
 import React from "react";
-import { PlayIcon } from "@heroicons/react/24/solid";
+import { PlayIcon } from "@heroicons/react/24/outline";
 import { PencilIcon } from "@heroicons/react/24/outline";
 
 type Props = {
@@ -18,9 +18,15 @@ export default function PreviewButton({ isPlayIcon, setStatus }: Props) {
       onClick={() => setStatus()}
     >
       {isPlayIcon ? (
-        <PlayIcon className="w-5 h-5 text-gray-500"/>
+        <div className="flex gap-1">
+          <PlayIcon className="w-5 h-5 text-gray-500"/>
+          プレビュー
+        </div>
       ) : (
-        <PencilIcon className="w-5 h-5 text-gray-500"/>
+        <div className="flex gap-1">
+          <PencilIcon className="w-5 h-5 text-gray-500"/>
+          編集
+        </div>
       )}
 
     </button>

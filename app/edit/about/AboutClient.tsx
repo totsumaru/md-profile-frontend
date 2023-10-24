@@ -12,14 +12,17 @@ type Props = {
 /**
  * Aboutの編集ページのクライアントコンポーネントです
  */
-export default function Client({ defaultValue, slug }: Props) {
+export default function AboutClient({ defaultValue, slug }: Props) {
   const [text, setText] = useState<string>(defaultValue)
   const [isEditor, setIsEditor] = useState<boolean>(true)
 
   return (
     <>
       <div className="flex flex-row-reverse">
-        <PreviewButton isPlayIcon={isEditor} setStatus={() => setIsEditor((prevState) => !prevState)}/>
+        <PreviewButton
+          isPlayIcon={isEditor}
+          setStatus={() => setIsEditor((prevState) => !prevState)}
+        />
       </div>
 
       <form className="mt-3">

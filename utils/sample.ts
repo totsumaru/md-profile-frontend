@@ -1,4 +1,4 @@
-export const SampleMD = `
+const SampleMD = `
 # 私のプロフィール
 
 Goを専業とするエンジニアです。
@@ -29,3 +29,17 @@ pです
 |---|---|
 |a|b|
 `
+
+export const SampleData = {
+  imageUrl: "https://pbs.twimg.com/profile_images/1647910051414429696/PzPDwwmk_400x400.jpg",
+  displayName: "Totsumaru｜webアプリを作る人",
+  introduction: "GoとNext.jsを頑張っています。",
+  slug: "totsumaru",
+  x: "totsumaru_dot",
+  instagram: "totsumaru_dot",
+  github: "totsumaru",
+  website: "https://google.com",
+  about: {
+    markdown: SampleMD
+  }
+}

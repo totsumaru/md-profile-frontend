@@ -1,17 +1,19 @@
 import React from "react";
 import EditTab from "@/components/tab/EditTab";
-import Client from "@/app/edit/about/Client";
-import { SampleMD } from "@/utils/markdown_tmp";
-import PreviewButton from "@/components/button/PreviewButton";
+import AboutClient from "@/app/edit/about/AboutClient";
+import { SampleData } from "@/utils/sample";
 
-export default function Index() {
+/**
+ * Aboutページです
+ */
+export default async function Index() {
   const slug = "totsumaru"
 
   return (
     <>
       <EditTab current={"about"}/>
 
-      <Client defaultValue={SampleMD} slug={slug}/>
+      <AboutClient defaultValue={SampleData.about.markdown} slug={slug}/>
     </>
   )
 }

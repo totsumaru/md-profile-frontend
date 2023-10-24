@@ -1,8 +1,11 @@
-import Profile from "@/components/Profile";
+import Profile from "@/app/me/[slug]/Profile";
 import About from "@/components/About";
 import ProfileTab from "@/components/tab/ProfileTab";
-import { SampleMD } from "@/utils/markdown_tmp";
+import { SampleData } from "@/utils/sample";
 
+/**
+ * ユーザーの公開ページ(me)です
+ */
 export default function Index({
   params: { slug }
 }: {
@@ -12,8 +15,16 @@ export default function Index({
     <main className="">
       {/* プロフィール */}
       <div className="bg-white mt-7 sm:mt-10 mx-auto max-w-3xl px-5 sm:px-6 lg:px-8">
-        <Profile/>
-        <div className="mt-3">
+        <Profile
+          imageUrl={SampleData.imageUrl}
+          displayName={SampleData.displayName}
+          introduction={SampleData.introduction}
+          x={SampleData.x}
+          instagram={SampleData.instagram}
+          github={SampleData.github}
+          website={SampleData.website}
+        />
+        <div className="mt-6">
           <ProfileTab/>
         </div>
       </div>
@@ -23,7 +34,7 @@ export default function Index({
         <div className="mx-auto max-w-3xl pb-10 px-6 sm:px-6 lg:px-8">
           {/* About */}
           <div className="w-full mb-20">
-            <About markdownText={SampleMD}/>
+            <About markdownText={SampleData.about.markdown}/>
           </div>
         </div>
       </div>

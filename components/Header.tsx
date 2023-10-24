@@ -1,3 +1,8 @@
+import Image from "next/image";
+
+/**
+ * Headerのコンポーネントです
+ */
 export default function Header() {
   return (
     <div className="w-full top-0 bg-white shadow">
@@ -7,7 +12,8 @@ export default function Header() {
           <div className="flex justify-start lg:w-0 lg:flex-1">
             <a href="#">
               <span className="sr-only">Company</span>
-              <img
+              <Image
+                width={100} height={100}
                 className="h-8 w-auto sm:h-10"
                 src="https://via.placeholder.com/150"
                 alt=""

@@ -5,6 +5,11 @@ import EditTab from "@/components/tab/EditTab";
 import ProfileClient from "@/app/edit/profile/ProfileClient";
 import { SampleData } from "@/utils/sample";
 
+export const dynamic = 'force-dynamic'
+
+/**
+ * プロフィールの編集ページです
+ */
 export default function Index() {
   return (
     <>

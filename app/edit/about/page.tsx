@@ -3,6 +3,8 @@ import EditTab from "@/components/tab/EditTab";
 import AboutClient from "@/app/edit/about/AboutClient";
 import { SampleData } from "@/utils/sample";
 
+export const dynamic = 'force-dynamic'
+
 /**
  * Aboutページです
  */

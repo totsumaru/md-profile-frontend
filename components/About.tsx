@@ -2,11 +2,15 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import remarkBreaks from 'remark-breaks';
+import Image from "next/image";
 
 type Props = {
   markdownText: string
 }
 
+/**
+ * MarkdownをHTMLに変換します
+ */
 export default function About({ markdownText }: Props) {
   return (
     <ReactMarkdown
@@ -46,9 +50,10 @@ export default function About({ markdownText }: Props) {
           const cleanAlt = alt?.replace("#half", ""); // 実際のaltテキストを取得
 
           return (
-            <img
-              src={src}
-              alt={cleanAlt}
+            <Image
+              width={100} height={100}
+              src={src || ""}
+              alt={cleanAlt || ""}
               className={isHalf ? "w-1/2 mt-3" : "w-full mt-3"}
             />
           );

@@ -1,5 +1,6 @@
 import SnsIcon from "@/components/SnsIcon";
 import { ArrowUpOnSquareIcon, PencilIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
 
 type Props = {
   imageUrl: string
@@ -22,8 +23,9 @@ export default function Profile(props: Props) {
           <div className="flex flex-col gap-6 sm:flex-row">
 
             {/* アバター */}
-            <img className="w-24 h-24 md:w-32 md:h-32 flex-none rounded-full object-cover"
-                 src={props.imageUrl} alt="avatar"
+            <Image className="w-24 h-24 md:w-32 md:h-32 flex-none rounded-full object-cover"
+                   width={100} height={100}
+                   src={props.imageUrl} alt="avatar"
             />
             <div className="max-w-xl flex-auto">
 

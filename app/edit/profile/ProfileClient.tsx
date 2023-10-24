@@ -1,6 +1,7 @@
 "use client"
 
 import { ChangeEvent, useRef, useState } from "react";
+import Image from "next/image";
 
 type Props = {
   imageUrl: string
@@ -49,12 +50,14 @@ export default function ProfileClient(props: Props) {
       <form className="mt-6">
         {/* アバター */}
         <div className="mb-6 w-fit hover:cursor-pointer flex flex-col items-center">
-          <img
+          <Image
             onClick={() => {
               if (inputRef.current) {
                 inputRef.current.click();
               }
             }}
+            width={100}
+            height={100}
             className="w-24 h-24 md:w-32 md:h-32 flex-none rounded-full object-cover"
             src={image}
             alt=""

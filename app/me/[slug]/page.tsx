@@ -3,6 +3,8 @@ import About from "@/components/About";
 import ProfileTab from "@/components/tab/ProfileTab";
 import { SampleData } from "@/utils/sample";
 
+export const dynamic = 'force-dynamic'
+
 /**
  * ユーザーの公開ページ(me)です
  */

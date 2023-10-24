@@ -51,7 +51,7 @@ export default function About({ markdownText }: Props) {
 
           return (
             <Image
-              width={100} height={100}
+              width={1920} height={1920}
               src={src || ""}
               alt={cleanAlt || ""}
               className={isHalf ? "w-1/2 mt-3" : "w-full mt-3"}

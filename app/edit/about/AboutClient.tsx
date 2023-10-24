@@ -29,17 +29,18 @@ export default function AboutClient({ defaultValue, slug }: Props) {
 
       // TODO: ここでバックエンドに画像を送信するロジックを追加
       // 例: const response = await uploadImageToBackend(event.target.files[0]);
-      // const imageUrl = response.data.url;
+      // const imageUrlMarkdown = response.data.url;
 
       // sleep
       await sleep(2000)
 
-      const imageUrl = "https://example.com/path/to/image.jpg"; // 仮のURL
+      const imageUrl = "https://media.discordapp.net/attachments/1127463906676330506/1166349390663925831/image.jpg"
+      const imageUrlMarkdown = `![](${imageUrl})`
 
       // カーソル位置に画像URLを挿入
       if (textAreaRef.current) {
         const cursorPosition = textAreaRef.current.selectionStart;
-        const newText = text.slice(0, cursorPosition) + imageUrl + text.slice(cursorPosition);
+        const newText = text.slice(0, cursorPosition) + imageUrlMarkdown + text.slice(cursorPosition);
         setText(newText);
       }
     }

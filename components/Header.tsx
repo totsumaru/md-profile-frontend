@@ -1,6 +1,6 @@
 export default function Header() {
   return (
-    <div className="w-full top-0 bg-white">
+    <div className="w-full top-0 bg-white shadow">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-3 md:justify-start md:space-x-10">
           {/* 左側(ロゴ) */}

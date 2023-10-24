@@ -1,13 +1,11 @@
+import { classNames } from "@/utils/classNames";
+
 const tabs = [
   { name: "概要", href: '#', current: true },
   // { name: "画像", href: '#', current: false },
 ]
 
-function classNames(...classes: any) {
-  return classes.filter(Boolean).join(' ')
-}
-
-export default function Tabs() {
+export default function ProfileTab() {
   return (
     <div>
       <div className="block">
@@ -21,7 +19,7 @@ export default function Tabs() {
                   tab.current
                     ? 'border-indigo-500 text-indigo-600'
                     : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700',
-                  'whitespace-nowrap border-b-2 py-4 px-1 text-base font-medium'
+                  'whitespace-nowrap border-b-2 py-3 px-1 text-base font-medium'
                 )}
                 aria-current={tab.current ? 'page' : undefined}
               >

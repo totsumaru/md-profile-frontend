@@ -32,13 +32,16 @@ export default function Profile() {
               {/* SNSアイコン */}
               <ul role="list" className="mt-6 flex gap-x-6">
                 <li>
-                  <SnsIcon kind={"x"}/>
+                  <SnsIcon kind={"x"} url={"#"}/>
                 </li>
                 <li>
-                  <SnsIcon kind={"instagram"}/>
+                  <SnsIcon kind={"instagram"} url={"#"}/>
                 </li>
                 <li>
-                  <SnsIcon kind={"github"}/>
+                  <SnsIcon kind={"github"} url={"#"}/>
+                </li>
+                <li>
+                  <SnsIcon kind={"link"} url={"#"}/>
                 </li>
               </ul>
 

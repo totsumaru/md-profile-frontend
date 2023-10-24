@@ -3,6 +3,8 @@
 import React, { useRef, useState } from "react";
 import About from "@/components/About";
 import { PencilIcon, PhotoIcon, PlayIcon } from "@heroicons/react/24/solid";
+import { sleep } from "@/utils/sleep";
+import Spinner from "@/components/Spinner";
 
 type Props = {
   defaultValue: string
@@ -21,12 +23,16 @@ export default function AboutClient({ defaultValue, slug }: Props) {
 
   // 画像ボタンがクリックされたときの挙動です
   const handleImageChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    setImageLoading(true) // loading開始
     if (event.target.files && event.target.files[0]) {
       setImage(event.target.files[0]);
 
-      // ここでバックエンドに画像を送信するロジックを追加
+      // TODO: ここでバックエンドに画像を送信するロジックを追加
       // 例: const response = await uploadImageToBackend(event.target.files[0]);
       // const imageUrl = response.data.url;
+
+      // sleep
+      await sleep(2000)
 
       const imageUrl = "https://example.com/path/to/image.jpg"; // 仮のURL
 
@@ -37,6 +43,7 @@ export default function AboutClient({ defaultValue, slug }: Props) {
         setText(newText);
       }
     }
+    setImageLoading(false) // loading終了
   };
 
   return (
@@ -44,10 +51,20 @@ export default function AboutClient({ defaultValue, slug }: Props) {
       <div className="flex justify-between">
         <div>
           {/* 画像追加ボタン */}
-          <label className="block w-fit rounded-md mt-3 bg-white px-3 py-2 text-sm font-semibold text-gray-600
-           shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:cursor-pointer">
-            <PhotoIcon className="w-5 h-5"/>
-            <input type="file" className="hidden" onChange={handleImageChange} accept="image/*"/>
+          <label className={`block w-fit rounded-md mt-3 bg-white px-3 py-2 text-sm font-semibold text-gray-600
+         shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:cursor-pointer ${imageLoading ? 'opacity-50 cursor-not-allowed' : ''}`}>
+            {imageLoading ? (
+              // loadingアイコンの表示
+              <span className="animate-spin">
+                <Spinner widthHeight={"5"}/>
+              </span>
+            ) : (
+              <>
+                <PhotoIcon className="w-5 h-5"/>
+                <input type="file" className="hidden" onChange={handleImageChange} accept="image/*"
+                       disabled={imageLoading}/>
+              </>
+            )}
           </label>
         </div>
 

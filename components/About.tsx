@@ -14,11 +14,11 @@ export default function About({ markdownText }: Props) {
       components={{
         // カスタムレンダラーを定義
         h1: ({ node, ...props }) => (
-          <h1 className="mt-7 pb-1 text-4xl font-bold border-b border-gray-300" {...props} />),
+          <h1 className="mt-7 pb-2 text-3xl font-bold border-b border-gray-300" {...props} />),
         h2: ({ node, ...props }) => (
-          <h2 className="mt-7 pb-1 text-3xl font-bold border-b border-gray-200" {...props} />),
-        h3: ({ node, ...props }) => (<h3 className="mt-7 text-2xl font-bold" {...props} />),
-        h4: ({ node, ...props }) => (<h4 className="mt-7 text-xl font-bold" {...props} />),
+          <h2 className="mt-7 pb-1 text-2xl font-bold border-b border-gray-200" {...props} />),
+        h3: ({ node, ...props }) => (<h3 className="mt-7 text-xl font-bold" {...props} />),
+        h4: ({ node, ...props }) => (<h4 className="mt-7 text-lg font-bold" {...props} />),
         p: ({ node, ...props }) => (<p className="mt-3 text-base leading-relaxed mb-4" {...props} />),
         ul: ({ node, ...props }) => (<ul className={`mt-3 list-disc ml-5 ${props.className}`} {...props} />),
         ol: ({ node, ...props }) => (<ol className="list-decimal ml-5" {...props} />),

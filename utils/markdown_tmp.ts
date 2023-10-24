@@ -4,6 +4,9 @@ export const SampleMD = `
 Goを専業とするエンジニアです。
 最近はNext.jsも取り組んでいます。
 
+テキスト
+テキスト2行目
+
 ## h2です
 
 [hello](https://google.com)

@@ -25,15 +25,15 @@ a
 
 pです
 
-|hello|foo|
-|---|---|
-|a|b|
+|hello|foo|hello|foo|hello|foo|
+|---|---|---|---|---|---|
+|a|b|a|aaaaaaaaaaaaaaaaaaaaaaaaa|aaaaaaaaaaaaaaaaaaaaaaaaa|aaaaaaaaaaaaaaaaaaaaaaaaa|
 `
 
 export const SampleData = {
   imageUrl: "https://pbs.twimg.com/profile_images/1647910051414429696/PzPDwwmk_400x400.jpg",
   displayName: "Totsumaru｜webアプリを作る人",
-  introduction: "GoとNext.jsを頑張っています。",
+  introduction: "",
   slug: "totsumaru",
   x: "totsumaru_dot",
   instagram: "totsumaru_dot",

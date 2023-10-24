@@ -1,8 +1,8 @@
 "use client"
 
-import React, { useState } from "react";
-import PreviewButton from "@/components/button/PreviewButton";
+import React, { useRef, useState } from "react";
 import About from "@/components/About";
+import { PencilIcon, PhotoIcon, PlayIcon } from "@heroicons/react/24/solid";
 
 type Props = {
   defaultValue: string
@@ -15,19 +15,66 @@ type Props = {
 export default function AboutClient({ defaultValue, slug }: Props) {
   const [text, setText] = useState<string>(defaultValue)
   const [isEditor, setIsEditor] = useState<boolean>(true)
+  const [image, setImage] = useState<File | null>(null)
+  const [imageLoading, setImageLoading] = useState<boolean>(false)
+  const textAreaRef = useRef<HTMLTextAreaElement | null>(null)
+
+  // 画像ボタンがクリックされたときの挙動です
+  const handleImageChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      setImage(event.target.files[0]);
+
+      // ここでバックエンドに画像を送信するロジックを追加
+      // 例: const response = await uploadImageToBackend(event.target.files[0]);
+      // const imageUrl = response.data.url;
+
+      const imageUrl = "https://example.com/path/to/image.jpg"; // 仮のURL
+
+      // カーソル位置に画像URLを挿入
+      if (textAreaRef.current) {
+        const cursorPosition = textAreaRef.current.selectionStart;
+        const newText = text.slice(0, cursorPosition) + imageUrl + text.slice(cursorPosition);
+        setText(newText);
+      }
+    }
+  };
 
   return (
     <>
-      <div className="flex flex-row-reverse">
-        <PreviewButton
-          isPlayIcon={isEditor}
-          setStatus={() => setIsEditor((prevState) => !prevState)}
-        />
+      <div className="flex justify-between">
+        <div>
+          {/* 画像追加ボタン */}
+          <label className="block w-fit rounded-md mt-3 bg-white px-3 py-2 text-sm font-semibold text-gray-600
+           shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:cursor-pointer">
+            <PhotoIcon className="w-5 h-5"/>
+            <input type="file" className="hidden" onChange={handleImageChange} accept="image/*"/>
+          </label>
+        </div>
+
+        {/* プレビューボタン */}
+        <button
+          className="block w-fit rounded-md mt-3 bg-white px-3 py-2 text-sm font-semibold text-gray-600
+           shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:cursor-pointer"
+          onClick={() => setIsEditor(prevState => !prevState)}
+        >
+          {isEditor ? (
+            <div className="flex gap-1">
+              <PlayIcon className="w-5 h-5 text-gray-600"/>
+              プレビュー
+            </div>
+          ) : (
+            <div className="flex gap-1">
+              <PencilIcon className="w-5 h-5 text-gray-500"/>
+              編集
+            </div>
+          )}
+        </button>
       </div>
 
       <form className="mt-3">
         {isEditor ? (
           <textarea
+            ref={textAreaRef}
             className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg
            focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700
            dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500
@@ -54,10 +101,7 @@ export default function AboutClient({ defaultValue, slug }: Props) {
           </button>
 
           {/* 戻る */}
-          <a
-            href={`/me/${slug}`}
-            className="ml-3 px-3.5 py-2.5 text-sm font-semibold text-gray-800"
-          >
+          <a href={`/me/${slug}`} className="ml-3 px-3.5 py-2.5 text-sm font-semibold text-gray-800">
             戻る
           </a>
         </div>

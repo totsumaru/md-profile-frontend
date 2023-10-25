@@ -1,6 +1,7 @@
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
+import { PostCreateUser } from "@/utils/api/postCreateUser";
 
 /**
  * コールバックのエンドポイントです
@@ -18,12 +19,14 @@ export async function GET(request: Request): Promise<Response> {
       return NextResponse.redirect(`/login`)
     }
 
-    // try {
-    //   await PostCreateHost(session.access_token, name)
-    // } catch (error) {
-    //   return new Response("Error occurred", { status: 500 })
-    // }
+    try {
+      const res = await PostCreateUser({ accessToken: session.access_token })
+      return NextResponse.redirect(`${requestUrl.origin}/me/${res.slug}`)
+    } catch (error) {
+      console.error(error)
+      return new Response("Error occurred", { status: 500 })
+    }
   }
 
-  return NextResponse.redirect(`${requestUrl.origin}/`)
+  return NextResponse.redirect(`${requestUrl.origin}`)
 }

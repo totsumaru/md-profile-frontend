@@ -1,22 +1,21 @@
 import { Fragment, useEffect } from 'react'
 import { Transition } from '@headlessui/react'
-import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/24/outline'
+import { CheckCircleIcon } from '@heroicons/react/24/outline'
 
 type Props = {
   show: boolean
-  setShow: (show: boolean) => void
+  closeToast: () => void
   text: string
-  success: boolean
 }
 
 /**
- * 通知のトーストです
+ * 成功時のトーストです
  */
-export default function Toast({ show, setShow, text, success }: Props) {
+export default function SuccessToast({ show, closeToast, text }: Props) {
   useEffect(() => {
     if (show) {
       const timer = setTimeout(() => { // 3. 2秒のタイムアウトを設定
-        setShow(false)
+        closeToast()
       }, 2000)
 
       return () => {
@@ -43,16 +42,12 @@ export default function Toast({ show, setShow, text, success }: Props) {
             leaveTo="opacity-0"
           >
             <div
-              className={`pointer-events-auto w-full max-w-sm overflow-hidden
-               rounded-lg ${success ? "bg-green-50" : "bg-red-50"} shadow-lg ring-1 ring-black ring-opacity-5`}>
+              className="pointer-events-auto w-full max-w-sm overflow-hidden
+               rounded-lg bg-green-50 shadow-lg ring-1 ring-black ring-opacity-5">
               <div className="p-4">
                 <div className="flex items-start">
                   <div className="flex-shrink-0">
-                    {success ? (
-                      <CheckCircleIcon className="h-6 w-6 text-green-400" aria-hidden="true"/>
-                    ) : (
-                      <XCircleIcon className="h-6 w-6 text-red-500" aria-hidden="true"/>
-                    )}
+                    <CheckCircleIcon className="h-6 w-6 text-green-400" aria-hidden="true"/>
                   </div>
                   <div className="ml-3 w-0 flex-1 pt-0.5">
                     <p className="text-sm font-medium text-gray-900">{text}</p>

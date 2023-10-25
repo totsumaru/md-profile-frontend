@@ -1,9 +1,10 @@
 "use client"
 
 import Image from "next/image";
-import { ChangeEvent, useRef, useState } from "react";
+import React, { ChangeEvent, useRef, useState } from "react";
 import { PostProfile, PostProfileProps } from "@/utils/api/postProfile";
-import Toast from "@/components/notice/Toast";
+import SuccessToast from "@/components/notice/SuccessToast";
+import ErrorToast from "@/components/notice/ErrorToast";
 
 type Props = {
   accessToken: string
@@ -31,6 +32,7 @@ export default function ProfileClient(props: Props) {
   const [github, setGithub] = useState<string>(props.github)
   const [website, setWebsite] = useState<string>(props.website)
   const [success, setSuccess] = useState<boolean>(false)
+  const [error, setError] = useState<boolean>(false)
 
   const inputRef = useRef<HTMLInputElement>(null); // input要素への参照
 
@@ -52,7 +54,6 @@ export default function ProfileClient(props: Props) {
     }
   };
 
-
   // 保存ボタンが押されたときの挙動です
   const handleClick = async () => {
     try {
@@ -71,16 +72,21 @@ export default function ProfileClient(props: Props) {
       setSuccess(true)
     } catch (e) {
       console.error(e)
+      setError(true)
     }
   }
 
   return (
     <>
-      <Toast
+      <SuccessToast
         show={success}
-        setShow={setSuccess}
+        closeToast={() => setSuccess(false)}
         text={"保存が完了しました"}
-        success={true}
+      />
+      <ErrorToast
+        show={error}
+        closeToast={() => setError(false)}
+        text={"エラーが発生しました"}
       />
       <form className="mt-6">
         {/* アバター */}

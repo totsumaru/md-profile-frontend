@@ -5,8 +5,12 @@ import About from "@/components/About";
 import { PencilIcon, PhotoIcon, PlayIcon } from "@heroicons/react/24/solid";
 import { sleep } from "@/utils/sleep";
 import Spinner from "@/components/Spinner";
+import { PostMarkdown } from "@/utils/api/postMarkdown";
+import SuccessToast from "@/components/notice/SuccessToast";
+import ErrorToast from "@/components/notice/ErrorToast";
 
 type Props = {
+  accessToken: string
   defaultValue: string
   slug: string
 }
@@ -14,11 +18,13 @@ type Props = {
 /**
  * Aboutの編集ページのクライアントコンポーネントです
  */
-export default function AboutClient({ defaultValue, slug }: Props) {
+export default function AboutClient({ accessToken, defaultValue, slug }: Props) {
   const [text, setText] = useState<string>(defaultValue)
   const [isEditor, setIsEditor] = useState<boolean>(true)
   const [image, setImage] = useState<File | null>(null)
   const [imageLoading, setImageLoading] = useState<boolean>(false)
+  const [success, setSuccess] = useState<boolean>(false)
+  const [error, setError] = useState<boolean>(false)
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null)
 
   // 画像ボタンがクリックされたときの挙動です
@@ -47,8 +53,32 @@ export default function AboutClient({ defaultValue, slug }: Props) {
     setImageLoading(false) // loading終了
   };
 
+  // 保存ボタンが押されたときの挙動です
+  const handleSaveClick = async () => {
+    try {
+      await PostMarkdown({
+        accessToken: accessToken,
+        markdown: text,
+      })
+      setSuccess(true)
+    } catch (e) {
+      console.error(e)
+      setError(true)
+    }
+  }
+
   return (
     <>
+      <SuccessToast
+        show={success}
+        closeToast={() => setSuccess(false)}
+        text={"保存が完了しました"}
+      />
+      <ErrorToast
+        show={error}
+        closeToast={() => setError(false)}
+        text={"エラーが発生しました"}
+      />
       <div className="flex justify-between">
         <div>
           {/* 画像追加ボタン */}
@@ -112,8 +142,9 @@ export default function AboutClient({ defaultValue, slug }: Props) {
         <div className="mt-5">
           {/* 保存ボタン */}
           <button
-            type="submit"
+            type="button"
             className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            onClick={handleSaveClick}
           >
             保存する
           </button>

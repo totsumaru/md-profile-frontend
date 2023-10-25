@@ -1,9 +1,20 @@
 "use client"
 
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+
 /**
  * ログインページです
  */
 export default function Index() {
+  const supabase = createClientComponentClient()
+
+  async function signInWithTwitter() {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'twitter',
+    })
+    console.log(error)
+  }
+
   return (
     <div className="bg-blue-50 min-h-screen">
       <div className="px-6 py-24 sm:px-6 sm:py-32 lg:px-8">
@@ -17,6 +28,7 @@ export default function Index() {
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <button
               type="button"
+              onClick={signInWithTwitter}
               className="flex rounded-md items-center bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
             >
               <svg className="w-7 h-7" viewBox="0 0 1800 1800" xmlns="http://www.w3.org/2000/svg">

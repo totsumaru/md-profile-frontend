@@ -1,8 +1,8 @@
 import axios from "axios"
 
-type Props = {
+export type PostProfileProps = {
   accessToken: string
-  avatar: File
+  avatar?: File | null
   displayName: string
   introduction: string
   slug: string
@@ -15,12 +15,12 @@ type Props = {
 /**
  * プロフィールを登録します
  */
-export async function PostProfile(props: Props) {
+export async function PostProfile(props: PostProfileProps) {
   const apiUrl = `${process.env.NEXT_PUBLIC_BE_URL}/api/profile`
 
   // FormDataを用いてフォームデータを準備
   const formData = new FormData()
-  formData.append("avatar", props.avatar)
+  props.avatar && formData.append("avatar", props.avatar)
   formData.append("display_name", props.displayName)
   formData.append("introduction", props.introduction)
   formData.append("slug", props.slug)
@@ -29,13 +29,13 @@ export async function PostProfile(props: Props) {
   formData.append("github", props.github)
   formData.append("website", props.website)
 
-  try {
-    await axios.post(apiUrl, formData, {
-      headers: {
-        "Authorization": `Bearer ${props.accessToken}`
-      }
-    })
-  } catch (error) {
-    throw error
-  }
+  // try {
+  //   await axios.post(apiUrl, formData, {
+  //     headers: {
+  //       "Authorization": `Bearer ${props.accessToken}`
+  //     }
+  //   })
+  // } catch (error) {
+  //   throw error
+  // }
 }

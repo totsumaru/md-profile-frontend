@@ -9,10 +9,9 @@ export default function Index() {
   const supabase = createClientComponentClient()
 
   async function signInWithTwitter() {
-    const { data, error } = await supabase.auth.signInWithOAuth({
+    await supabase.auth.signInWithOAuth({
       provider: 'twitter',
     })
-    console.log(error)
   }
 
   return (

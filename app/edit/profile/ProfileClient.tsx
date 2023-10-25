@@ -1,9 +1,12 @@
 "use client"
 
-import { ChangeEvent, useRef, useState } from "react";
 import Image from "next/image";
+import { ChangeEvent, useRef, useState } from "react";
+import { PostProfile, PostProfileProps } from "@/utils/api/postProfile";
+import Toast from "@/components/notice/Toast";
 
 type Props = {
+  accessToken: string
   imageUrl: string
   displayName: string
   introduction: string
@@ -18,7 +21,8 @@ type Props = {
  * プロフィール編集ページのClientコンポーネントです
  */
 export default function ProfileClient(props: Props) {
-  const [image, setImage] = useState<string>(props.imageUrl);
+  const [avatarUrl, setAvatarUrl] = useState<string>(props.imageUrl)
+  const [avatarFile, setAvatarFile] = useState<File | null>(null)
   const [displayName, setDisplayName] = useState<string>(props.displayName)
   const [intro, setIntro] = useState<string>(props.introduction)
   const [slug, setSlug] = useState<string>(props.slug)
@@ -26,17 +30,20 @@ export default function ProfileClient(props: Props) {
   const [instagram, setInstagram] = useState<string>(props.instagram)
   const [github, setGithub] = useState<string>(props.github)
   const [website, setWebsite] = useState<string>(props.website)
+  const [success, setSuccess] = useState<boolean>(false)
 
   const inputRef = useRef<HTMLInputElement>(null); // input要素への参照
 
   // inputが変更されたときにファイルを読み込む関数
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => { // eventパラメータの型を指定
-    const file = event.target.files?.[0]; // `files`はnull可能性があるため、オプショナルチェイニングを使用
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
     if (file && file.type.match('image.*')) {
+      setAvatarFile(file);
+
       const reader = new FileReader();
-      reader.onload = (e: ProgressEvent<FileReader>) => { // ここでもeの型を明示的に指定
+      reader.onload = (e: ProgressEvent<FileReader>) => {
         if (e.target?.result) {
-          setImage(e.target.result.toString()); // resultはstringまたはArrayBufferのため、toStringを使用してstringに変換
+          setAvatarUrl(e.target.result.toString());
         }
       };
       reader.readAsDataURL(file);
@@ -45,8 +52,36 @@ export default function ProfileClient(props: Props) {
     }
   };
 
+
+  // 保存ボタンが押されたときの挙動です
+  const handleClick = async () => {
+    try {
+      const req: PostProfileProps = {
+        accessToken: props.accessToken,
+        avatar: avatarFile,
+        displayName: displayName,
+        introduction: intro,
+        slug: slug,
+        x: x,
+        instagram: instagram,
+        github: github,
+        website: website,
+      }
+      await PostProfile(req)
+      setSuccess(true)
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
   return (
     <>
+      <Toast
+        show={success}
+        setShow={setSuccess}
+        text={"保存が完了しました"}
+        success={true}
+      />
       <form className="mt-6">
         {/* アバター */}
         <div className="mb-6 w-fit hover:cursor-pointer flex flex-col items-center">
@@ -59,7 +94,7 @@ export default function ProfileClient(props: Props) {
             width={100}
             height={100}
             className="w-24 h-24 md:w-32 md:h-32 flex-none rounded-full object-cover"
-            src={image}
+            src={avatarUrl}
             alt=""
           />
           <input
@@ -190,8 +225,9 @@ export default function ProfileClient(props: Props) {
         <div className="mt-5">
           {/* 保存ボタン */}
           <button
-            type="submit"
+            type="button"
             className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            onClick={handleClick}
           >
             保存する
           </button>

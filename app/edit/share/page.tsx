@@ -2,6 +2,8 @@ import EditTab from "@/components/tab/EditTab";
 import ShareClient from "@/app/edit/share/ShareClient";
 import { ProfileBackend } from "@/utils/api/api";
 import { GetFindByAccessToken } from "@/utils/api/getFindByAccessToken";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
 
 export const dynamic = 'force-dynamic'
 
@@ -9,11 +11,14 @@ export const dynamic = 'force-dynamic'
  * 公開設定ページです
  */
 export default async function Index() {
-  const token = "token-hello"
+  const supabase = createServerComponentClient({ cookies })
+  const { data: { session } } = await supabase.auth.getSession()
 
   let profile: ProfileBackend | undefined
   try {
-    profile = await GetFindByAccessToken({ accessToken: token })
+    profile = await GetFindByAccessToken({
+      accessToken: session?.access_token || ""
+    })
   } catch (e) {
     console.error("データを取得できません", e)
   }

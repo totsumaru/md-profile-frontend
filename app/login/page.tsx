@@ -10,7 +10,9 @@ export default function Index() {
 
   async function signInWithTwitter() {
     await supabase.auth.signInWithOAuth({
-      provider: 'twitter',
+      provider: 'twitter', options: {
+        redirectTo: `${process.env.NEXT_PUBLIC_FE_URL}/auth/callback`
+      }
     })
   }
 

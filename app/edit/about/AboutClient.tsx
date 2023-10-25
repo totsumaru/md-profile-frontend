@@ -8,6 +8,7 @@ import Spinner from "@/components/Spinner";
 import { PostMarkdown } from "@/utils/api/postMarkdown";
 import SuccessToast from "@/components/notice/SuccessToast";
 import ErrorToast from "@/components/notice/ErrorToast";
+import { PostImageUpload } from "@/utils/api/postImage";
 
 type Props = {
   accessToken: string
@@ -21,7 +22,6 @@ type Props = {
 export default function AboutClient({ accessToken, defaultValue, slug }: Props) {
   const [text, setText] = useState<string>(defaultValue)
   const [isEditor, setIsEditor] = useState<boolean>(true)
-  const [image, setImage] = useState<File | null>(null)
   const [imageLoading, setImageLoading] = useState<boolean>(false)
   const [success, setSuccess] = useState<boolean>(false)
   const [error, setError] = useState<boolean>(false)
@@ -31,26 +31,34 @@ export default function AboutClient({ accessToken, defaultValue, slug }: Props) 
   const handleImageChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     setImageLoading(true) // loading開始
     if (event.target.files && event.target.files[0]) {
-      setImage(event.target.files[0]);
-
       // TODO: ここでバックエンドに画像を送信するロジックを追加
       // 例: const response = await uploadImageToBackend(event.target.files[0]);
       // const imageUrlMarkdown = response.data.url;
+      try {
+        const imageUrl = await PostImageUpload({
+          accessToken: accessToken,
+          image: event.target.files[0]
+        })
 
-      // sleep
-      await sleep(2000)
+        // TODO: 削除
+        // sleep
+        await sleep(2000)
 
-      const imageUrl = "https://media.discordapp.net/attachments/1127463906676330506/1166349390663925831/image.jpg"
-      const imageUrlMarkdown = `![](${imageUrl})`
+        const imageUrlMarkdown = `![](${imageUrl})`
 
-      // カーソル位置に画像URLを挿入
-      if (textAreaRef.current) {
-        const cursorPosition = textAreaRef.current.selectionStart;
-        const newText = text.slice(0, cursorPosition) + imageUrlMarkdown + text.slice(cursorPosition);
-        setText(newText);
+        // カーソル位置に画像URLを挿入
+        if (textAreaRef.current) {
+          const cursorPosition = textAreaRef.current.selectionStart;
+          const newText = text.slice(0, cursorPosition) + imageUrlMarkdown + text.slice(cursorPosition);
+          setText(newText);
+        }
+      } catch (e) {
+        console.error(e)
+        setError(true)
+      } finally {
+        setImageLoading(false) // loading終了
       }
     }
-    setImageLoading(false) // loading終了
   };
 
   // 保存ボタンが押されたときの挙動です

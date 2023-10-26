@@ -1,7 +1,7 @@
-import Footer from "@/components/footer";
+import Footer from "@/components/Footer";
 import XLoginButton from "@/components/button/XLoginButton";
 
-export default function Home() {
+export default function Index() {
   return (
     <div className="bg-blue-50">
       <div className="relative isolate pt-14">

@@ -29,10 +29,10 @@ export default async function Index({
           imageUrl={profile?.avatar || ""}
           displayName={profile?.display_name || ""}
           introduction={profile?.introduction || ""}
-          x={profile?.x || ""}
-          instagram={profile?.instagram || ""}
-          github={profile?.github || ""}
-          website={profile?.website || ""}
+          x={profile?.link.x || ""}
+          instagram={profile?.link.instagram || ""}
+          github={profile?.link.github || ""}
+          website={profile?.link.website || ""}
         />
         <div className="mt-6">
           <ProfileTab/>

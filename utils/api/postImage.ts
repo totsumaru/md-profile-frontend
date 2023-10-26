@@ -15,17 +15,15 @@ export async function PostImageUpload({ accessToken, image }: Props): Promise<st
   const formData = new FormData()
   formData.append("image", image)
 
-  // try {
-  //   const res = await axios.post<string>(apiUrl, formData, {
-  //     headers: {
-  //       "Authorization": `Bearer ${accessToken}`
-  //     }
-  //   })
-  //
-  //   return res.data
-  // } catch (error) {
-  //   throw error
-  // }
+  try {
+    const res = await axios.post<string>(apiUrl, formData, {
+      headers: {
+        "Authorization": `Bearer ${accessToken}`
+      }
+    })
 
-  return "https://media.discordapp.net/attachments/1127463906676330506/1166349390663925831/image.jpg"
+    return res.data
+  } catch (error) {
+    throw error
+  }
 }

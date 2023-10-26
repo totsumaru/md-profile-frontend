@@ -1,4 +1,5 @@
 import { ProfileBackend } from "@/utils/api/api";
+import axios from "axios";
 
 const SampleMD = `
 # 私のプロフィール
@@ -40,25 +41,12 @@ type Props = {
  * プロフィールを取得します
  */
 export async function GetFindBySlug({ slug }: Props): Promise<ProfileBackend> {
-  // const apiUrl = `${process.env.NEXT_PUBLIC_BE_URL}/api/profile?slug=${slug}`;
-  //
-  // try {
-  //   const response = await axios.get<Profile>(apiUrl);
-  //
-  //   return response.data;
-  // } catch (error) {
-  //   throw error;
-  // }
+  const apiUrl = `${process.env.NEXT_PUBLIC_BE_URL}/api/profile/slug/${slug}`;
 
-  return {
-    avatar: "https://pbs.twimg.com/profile_images/1647910051414429696/PzPDwwmk_400x400.jpg",
-    display_name: "Totsumaru｜webアプリを作る人",
-    introduction: "",
-    slug: "totsumaru",
-    x: "totsumaru_dot",
-    instagram: "totsumaru_dot",
-    github: "totsumaru",
-    website: "https://google.com",
-    markdown: SampleMD
+  try {
+    const response = await axios.get<ProfileBackend>(apiUrl);
+    return response.data;
+  } catch (error) {
+    throw error;
   }
 }

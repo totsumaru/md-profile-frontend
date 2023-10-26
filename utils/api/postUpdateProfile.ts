@@ -1,4 +1,5 @@
 import axios from "axios"
+import { ProfileBackend } from "@/utils/api/api";
 
 export type PostProfileProps = {
   accessToken: string
@@ -13,29 +14,30 @@ export type PostProfileProps = {
 }
 
 /**
- * プロフィールを登録します
+ * プロフィールを更新します
  */
-export async function PostProfile(props: PostProfileProps) {
-  const apiUrl = `${process.env.NEXT_PUBLIC_BE_URL}/api/profile`
+export async function PostUpdateProfile(props: PostProfileProps): Promise<ProfileBackend> {
+  const apiUrl = `${process.env.NEXT_PUBLIC_BE_URL}/api/profile/update`
 
   // FormDataを用いてフォームデータを準備
   const formData = new FormData()
   props.avatar && formData.append("avatar", props.avatar)
+  formData.append("slug", props.slug)
   formData.append("display_name", props.displayName)
   formData.append("introduction", props.introduction)
-  formData.append("slug", props.slug)
   formData.append("x", props.x)
   formData.append("instagram", props.instagram)
   formData.append("github", props.github)
   formData.append("website", props.website)
 
-  // try {
-  //   await axios.post(apiUrl, formData, {
-  //     headers: {
-  //       "Authorization": `Bearer ${props.accessToken}`
-  //     }
-  //   })
-  // } catch (error) {
-  //   throw error
-  // }
+  try {
+    const res = await axios.post(apiUrl, formData, {
+      headers: {
+        "Authorization": `Bearer ${props.accessToken}`
+      }
+    })
+    return res.data
+  } catch (error) {
+    throw error
+  }
 }

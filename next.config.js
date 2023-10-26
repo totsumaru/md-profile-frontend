@@ -5,6 +5,7 @@ const nextConfig = {
       "pbs.twimg.com",
       "via.placeholder.com",
       "media.discordapp.net",
+      "image.profio.jp",
     ]
   }
 }

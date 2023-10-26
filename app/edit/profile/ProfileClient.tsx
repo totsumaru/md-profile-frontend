@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import React, { ChangeEvent, useRef, useState } from "react";
-import { PostProfile, PostProfileProps } from "@/utils/api/postProfile";
+import { PostUpdateProfile, PostProfileProps } from "@/utils/api/postUpdateProfile";
 import SuccessToast from "@/components/notice/SuccessToast";
 import ErrorToast from "@/components/notice/ErrorToast";
 
@@ -68,7 +68,7 @@ export default function ProfileClient(props: Props) {
         github: github,
         website: website,
       }
-      await PostProfile(req)
+      await PostUpdateProfile(req)
       setSuccess(true)
     } catch (e) {
       console.error(e)

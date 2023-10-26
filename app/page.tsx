@@ -1,5 +1,8 @@
 import Footer from "@/components/Footer";
 import XLoginButton from "@/components/button/XLoginButton";
+import Image from "next/image";
+
+export const dynamic = 'force-dynamic'
 
 export default function Index() {
   return (
@@ -25,7 +28,7 @@ export default function Index() {
             <div className="mt-16 flow-root sm:mt-24">
               <div
                 className="-m-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-4">
-                <img
+                <Image
                   src="/top.png"
                   alt="App screenshot"
                   width={2432}

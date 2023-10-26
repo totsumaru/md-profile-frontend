@@ -22,7 +22,7 @@ export default function ErrorToast({ show, closeToast, text }: Props) {
         clearTimeout(timer) // Toastがアンマウントされるときにタイマーをクリア
       }
     }
-  }, [show])
+  }, [show, closeToast])
 
   return (
     <>

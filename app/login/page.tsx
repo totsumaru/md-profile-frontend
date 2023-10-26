@@ -1,5 +1,7 @@
 import XLoginButton from "@/components/button/XLoginButton";
 
+export const dynamic = 'force-dynamic'
+
 /**
  * ログインページです
  */

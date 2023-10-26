@@ -2,6 +2,8 @@ import SnsIcon from "@/components/SnsIcon";
 import { ArrowUpOnSquareIcon, PencilIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 
+export const dynamic = 'force-dynamic'
+
 type Props = {
   imageUrl: string
   displayName: string

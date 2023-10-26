@@ -21,7 +21,7 @@ export default async function Header() {
               <Image
                 width={100} height={100}
                 className="h-8 w-auto sm:h-10"
-                src="https://via.placeholder.com/150"
+                src="/logo.png"
                 alt=""
               />
             </a>

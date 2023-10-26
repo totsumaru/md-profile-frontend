@@ -7,8 +7,8 @@ import Header from "@/components/Header";
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: "MD-Profile",
-  description: 'Markdownで記述できるプロフィールサイトです。',
+  title: "Profio",
+  description: "Profio｜個人のための、最も使いやすいプロフィール作成ツール。",
 }
 
 export default function RootLayout({

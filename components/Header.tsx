@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-import LoginButton from "@/components/button/LoginButton";
+import ToLoginPageButton from "@/components/button/ToLoginPageButton";
 
 /**
  * Headerのコンポーネントです
@@ -28,7 +28,7 @@ export default async function Header() {
           </div>
 
           <div className="flex items-center justify-end md:flex-1 lg:w-0">
-            <LoginButton isLogin={!!session}/>
+            <ToLoginPageButton isLogin={!!session}/>
           </div>
         </div>
       </div>

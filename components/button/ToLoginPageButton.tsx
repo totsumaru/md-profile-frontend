@@ -11,7 +11,7 @@ type Props = {
 /**
  * ログインボタンです
  */
-export default function LoginButton({ isLogin }: Props) {
+export default function ToLoginPageButton({ isLogin }: Props) {
   const router = useRouter()
   const pathname = usePathname()
   const supabase = createClientComponentClient()

@@ -8,7 +8,7 @@ import Spinner from "@/components/Spinner";
 import { PostUpdateMarkdown } from "@/utils/api/postUpdateMarkdown";
 import SuccessToast from "@/components/notice/SuccessToast";
 import ErrorToast from "@/components/notice/ErrorToast";
-import { PostImageUpload } from "@/utils/api/postImage";
+import { PostUploadImage } from "@/utils/api/postUploadImage";
 
 type Props = {
   accessToken: string
@@ -36,7 +36,7 @@ export default function AboutClient({ accessToken, defaultValue, slug }: Props) 
       // 例: const response = await uploadImageToBackend(event.target.files[0]);
       // const imageUrlMarkdown = response.data.url;
       try {
-        const imageUrl = await PostImageUpload({
+        const imageUrl = await PostUploadImage({
           accessToken: accessToken,
           image: event.target.files[0]
         })

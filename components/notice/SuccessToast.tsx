@@ -14,12 +14,12 @@ type Props = {
 export default function SuccessToast({ show, closeToast, text }: Props) {
   useEffect(() => {
     if (show) {
-      const timer = setTimeout(() => { // 3. 2秒のタイムアウトを設定
+      const timer = setTimeout(() => { // タイムアウトを設定
         closeToast()
       }, 2500)
 
       return () => {
-        clearTimeout(timer) // 4. Toastがアンマウントされるときにタイマーをクリア
+        clearTimeout(timer) // Toastがアンマウントされるときにタイマーをクリア
       }
     }
   }, [show])

@@ -1,6 +1,7 @@
 import SnsIcon from "@/components/SnsIcon";
 import { ArrowUpOnSquareIcon, PencilIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
+import Link from "next/link";
 
 export const dynamic = 'force-dynamic'
 
@@ -39,11 +40,11 @@ export default function Profile(props: Props) {
 
                 <div className="w-fit flex gap-1">
                   {/* 編集アイコン */}
-                  <a
-                    href="/edit/profile"
+                  <Link
+                    href="../../edit/profile"
                     className="block w-fit rounded-md bg-white px-2 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:cursor-pointer">
                     <PencilIcon className="h-5 w-5"/>
-                  </a>
+                  </Link>
                   {/* 共有アイコン */}
                   <a
                     href="/edit/share"

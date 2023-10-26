@@ -8,8 +8,8 @@ type Props = {
 /**
  * マークダウンを登録します
  */
-export async function PostMarkdown({ accessToken, markdown }: Props) {
-  const apiUrl = `${process.env.NEXT_PUBLIC_BE_URL}/api/markdown`
+export async function PostUpdateMarkdown({ accessToken, markdown }: Props) {
+  const apiUrl = `${process.env.NEXT_PUBLIC_BE_URL}/api/profile/update/markdown`
 
   // FormDataを用いてフォームデータを準備
   const formData = new FormData()

@@ -40,7 +40,7 @@ export default async function Index({
       </div>
 
       {/* コンテンツ */}
-      <div className="mx-auto sm:px-6 lg:px-8 bg-blue-50 bg-opacity-50 pt-5">
+      <div className="mx-auto sm:px-6 lg:px-8 h-full bg-blue-50 bg-opacity-50 pt-5">
         <div className="mx-auto max-w-3xl pb-10 px-6 sm:px-6 lg:px-8">
           {/* About */}
           <div className="w-full mb-20">

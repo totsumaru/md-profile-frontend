@@ -33,6 +33,7 @@ export default function ProfileClient(props: Props) {
   const [website, setWebsite] = useState<string>(props.website)
   const [success, setSuccess] = useState<boolean>(false)
   const [error, setError] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false)
 
   const inputRef = useRef<HTMLInputElement>(null); // input要素への参照
 
@@ -57,6 +58,7 @@ export default function ProfileClient(props: Props) {
   // 保存ボタンが押されたときの挙動です
   const handleClick = async () => {
     try {
+      setLoading(true)
       const req: PostProfileProps = {
         accessToken: props.accessToken,
         avatar: avatarFile,
@@ -73,6 +75,8 @@ export default function ProfileClient(props: Props) {
     } catch (e) {
       console.error(e)
       setError(true)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -234,8 +238,9 @@ export default function ProfileClient(props: Props) {
             type="button"
             className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             onClick={handleClick}
+            disabled={loading}
           >
-            保存する
+            {loading ? "..." : "保存する"}
           </button>
 
           {/* 戻る */}

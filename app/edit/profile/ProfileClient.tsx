@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import React, { ChangeEvent, useRef, useState } from "react";
-import { PostUpdateProfile, PostProfileProps } from "@/utils/api/postUpdateProfile";
+import { PostProfileProps, PostUpdateProfile } from "@/utils/api/postUpdateProfile";
 import SuccessToast from "@/components/notice/SuccessToast";
 import ErrorToast from "@/components/notice/ErrorToast";
 
@@ -99,7 +99,7 @@ export default function ProfileClient(props: Props) {
             }}
             width={100}
             height={100}
-            className="w-24 h-24 md:w-32 md:h-32 flex-none rounded-full object-cover"
+            className="w-24 h-24 md:w-32 md:h-32 ring-1 ring-gray-400 flex-none rounded-full object-cover"
             src={avatarUrl}
             alt=""
           />

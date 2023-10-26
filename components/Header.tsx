@@ -1,9 +1,15 @@
 import Image from "next/image";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
+import LoginButton from "@/components/button/LoginButton";
 
 /**
  * Headerのコンポーネントです
  */
-export default function Header() {
+export default async function Header() {
+  const supabase = createServerComponentClient({ cookies })
+  const { data: { session } } = await supabase.auth.getSession()
+
   return (
     <div className="w-full top-0 bg-white shadow">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -22,12 +28,7 @@ export default function Header() {
           </div>
 
           <div className="flex items-center justify-end md:flex-1 lg:w-0">
-            <a
-              href="/login"
-              className="ml-6 inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-              ログイン
-            </a>
+            <LoginButton isLogin={!!session}/>
           </div>
         </div>
       </div>

@@ -8,17 +8,12 @@ export async function middleware(req: NextRequest) {
 
   const { data: { user } } = await supabase.auth.getUser()
 
-  // if (!user && req.nextUrl.pathname === '/edit/about') {
-  //   return NextResponse.redirect(new URL('/login', req.url))
-  // }
-  //
-  // if (!user && req.nextUrl.pathname === '/edit/profile') {
-  //   return NextResponse.redirect(new URL('/login', req.url))
-  // }
-  //
-  // if (!user && req.nextUrl.pathname === '/edit/share') {
-  //   return NextResponse.redirect(new URL('/login', req.url))
-  // }
+  if (!user) {
+    // ログインしていない時
+    if (req.nextUrl.pathname.startsWith("/edit")) {
+      return NextResponse.redirect(new URL('/login', req.url))
+    }
+  }
 
   return res
 }

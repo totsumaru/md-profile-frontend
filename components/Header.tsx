@@ -16,7 +16,7 @@ export default async function Header() {
         <div className="flex justify-between items-center py-3 md:justify-start md:space-x-10">
           {/* 左側(ロゴ) */}
           <div className="flex justify-start lg:w-0 lg:flex-1">
-            <a href="#">
+            <a href="/">
               <span className="sr-only">Company</span>
               <Image
                 width={100} height={100}

@@ -55,8 +55,47 @@ export default function ProfileClient(props: Props) {
     }
   };
 
+  // Formの値をバリデーションします
+  const validate = (): string => {
+    if (displayName.length > 60) {
+      return "表示名は60文字以内で入力してください"
+    }
+    if (displayName === "") {
+      return "表示名が入力されていません"
+    }
+    if (intro.length > 200) {
+      return "自己紹介は200文字以内で入力してください"
+    }
+    if (slug.length > 40) {
+      return "公開URLは40文字以内で入力してください"
+    }
+    if (slug === "") {
+      return "公開URLが入力されていません"
+    }
+    if (x.length > 14) {
+      return "Xのユーザー名は14文字以内で入力してください"
+    }
+    if (instagram.length > 30) {
+      return "Instagramのユーザー名は30文字以内で入力してください"
+    }
+    if (github.length > 39) {
+      return "Githubのユーザー名は39文字以内で入力してください"
+    }
+    if (website.length > 300) {
+      return "ウェブサイトのURLは300文字以内で入力してください"
+    }
+
+    return ""
+  }
+
   // 保存ボタンが押されたときの挙動です
   const handleClick = async () => {
+    const err = validate()
+    if (err) {
+      alert(err)
+      return
+    }
+
     try {
       setLoading(true)
       const req: PostProfileProps = {

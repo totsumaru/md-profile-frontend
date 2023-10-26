@@ -16,7 +16,7 @@ export default function ErrorToast({ show, closeToast, text }: Props) {
     if (show) {
       const timer = setTimeout(() => { // 3. 2秒のタイムアウトを設定
         closeToast()
-      }, 2000)
+      }, 2500)
 
       return () => {
         clearTimeout(timer) // 4. Toastがアンマウントされるときにタイマーをクリア
@@ -43,14 +43,14 @@ export default function ErrorToast({ show, closeToast, text }: Props) {
           >
             <div
               className="pointer-events-auto w-full max-w-sm overflow-hidden
-               rounded-lg bg-red-50 shadow-lg ring-1 ring-black ring-opacity-5">
+               rounded-lg bg-red-200 shadow-lg ring-1 ring-black ring-opacity-5">
               <div className="p-4">
-                <div className="flex items-start">
+                <div className="flex items-start text-red-900">
                   <div className="flex-shrink-0">
-                    <XCircleIcon className="h-6 w-6 text-red-500" aria-hidden="true"/>
+                    <XCircleIcon className="h-6 w-6" aria-hidden="true"/>
                   </div>
                   <div className="ml-3 w-0 flex-1 pt-0.5">
-                    <p className="text-sm font-medium text-gray-900">{text}</p>
+                    <p className="text-sm font-medium">{text}</p>
                     {/*<p className="mt-1 text-sm text-gray-500">サブテキスト</p>*/}
                   </div>
                 </div>

@@ -3,7 +3,6 @@
 import React, { useRef, useState } from "react";
 import About from "@/components/About";
 import { PencilIcon, PhotoIcon, PlayIcon } from "@heroicons/react/24/solid";
-import { sleep } from "@/utils/sleep";
 import Spinner from "@/components/Spinner";
 import { PostUpdateMarkdown } from "@/utils/api/postUpdateMarkdown";
 import SuccessToast from "@/components/notice/SuccessToast";
@@ -20,10 +19,10 @@ type Props = {
  * Aboutの編集ページのクライアントコンポーネントです
  */
 export default function AboutClient({ accessToken, defaultValue, slug }: Props) {
-  const [text, setText] = useState<string>(defaultValue)
+  const [markdown, setMarkdown] = useState<string>(defaultValue)
   const [isEditor, setIsEditor] = useState<boolean>(true)
   const [imageLoading, setImageLoading] = useState<boolean>(false)
-  const [success, setSuccess] = useState<boolean>(false)
+  const [success, setSuccess] = useState<boolean>(true)
   const [error, setError] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(false)
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null)
@@ -32,26 +31,19 @@ export default function AboutClient({ accessToken, defaultValue, slug }: Props) 
   const handleImageChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     setImageLoading(true) // loading開始
     if (event.target.files && event.target.files[0]) {
-      // TODO: ここでバックエンドに画像を送信するロジックを追加
-      // 例: const response = await uploadImageToBackend(event.target.files[0]);
-      // const imageUrlMarkdown = response.data.url;
       try {
         const imageUrl = await PostUploadImage({
           accessToken: accessToken,
           image: event.target.files[0]
         })
 
-        // TODO: 削除
-        // sleep
-        await sleep(2000)
-
         const imageUrlMarkdown = `![](${imageUrl})`
 
         // カーソル位置に画像URLを挿入
         if (textAreaRef.current) {
           const cursorPosition = textAreaRef.current.selectionStart;
-          const newText = text.slice(0, cursorPosition) + imageUrlMarkdown + text.slice(cursorPosition);
-          setText(newText);
+          const newText = markdown.slice(0, cursorPosition) + imageUrlMarkdown + markdown.slice(cursorPosition);
+          setMarkdown(newText);
         }
       } catch (e) {
         console.error(e)
@@ -62,13 +54,27 @@ export default function AboutClient({ accessToken, defaultValue, slug }: Props) 
     }
   };
 
+  // Formの値をバリデーションします
+  const validate = (): string => {
+    if (markdown.length > 3000) {
+      return "テキストは3000文字以内で入力してください"
+    }
+    return ""
+  }
+
   // 保存ボタンが押されたときの挙動です
   const handleSaveClick = async () => {
+    const err = validate()
+    if (err) {
+      alert(err)
+      return
+    }
+
     try {
       setLoading(true)
       await PostUpdateMarkdown({
         accessToken: accessToken,
-        markdown: text,
+        markdown: markdown,
       })
       setSuccess(true)
     } catch (e) {
@@ -84,7 +90,7 @@ export default function AboutClient({ accessToken, defaultValue, slug }: Props) 
       <SuccessToast
         show={success}
         closeToast={() => setSuccess(false)}
-        text={"保存が完了しました"}
+        text={"保存しました"}
       />
       <ErrorToast
         show={error}
@@ -141,13 +147,13 @@ export default function AboutClient({ accessToken, defaultValue, slug }: Props) 
            dark:focus:border-blue-500"
             rows={30}
             placeholder="自己紹介を入力"
-            value={text}
-            onChange={(event) => setText(event.target.value)}
+            value={markdown}
+            onChange={(event) => setMarkdown(event.target.value)}
             required
           />
         ) : (
           <div className="pb-8 border-b border-b-gray-300">
-            <About markdownText={text}/>
+            <About markdownText={markdown}/>
           </div>
         )}
 

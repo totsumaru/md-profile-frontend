@@ -124,7 +124,7 @@ export default function ProfileClient(props: Props) {
       <SuccessToast
         show={success}
         closeToast={() => setSuccess(false)}
-        text={"保存が完了しました"}
+        text={"保存しました"}
       />
       <ErrorToast
         show={error}

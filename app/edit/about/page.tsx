@@ -6,8 +6,6 @@ import { GetFindByAccessToken } from "@/utils/api/getFindByAccessToken";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 
-export const dynamic = 'force-dynamic'
-
 /**
  * Aboutの編集ページです
  */

@@ -1,8 +1,8 @@
 import React from "react";
-import XIcon from "@/components/icon/x";
-import InstagramIcon from "@/components/icon/instagram";
-import GithubIcon from "@/components/icon/github";
-import LinkIcon from "@/components/icon/link";
+import XIcon from "@/components/icon/X";
+import InstagramIcon from "@/components/icon/Instagram";
+import GithubIcon from "@/components/icon/Github";
+import LinkIcon from "@/components/icon/Link";
 
 type Props = {
   kind: "x" | "instagram" | "github" | "website"

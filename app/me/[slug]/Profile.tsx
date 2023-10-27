@@ -3,8 +3,6 @@ import { ArrowUpOnSquareIcon, PencilIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
 
-export const dynamic = 'force-dynamic'
-
 type Props = {
   imageUrl: string
   displayName: string

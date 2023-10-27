@@ -4,7 +4,6 @@ import ProfileTab from "@/components/tab/ProfileTab";
 import { ProfileBackend } from "@/utils/api/api";
 import { GetFindBySlug } from "@/utils/api/getFindBySlug";
 
-export const dynamic = 'force-dynamic'
 
 /**
  * ユーザーの公開ページ(me)です

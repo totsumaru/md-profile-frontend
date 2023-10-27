@@ -6,6 +6,8 @@ import { GetFindBySlug } from "@/utils/api/getFindBySlug";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 
+export const revalidate = 100
+
 /**
  * ユーザーの公開ページ(me)です
  */

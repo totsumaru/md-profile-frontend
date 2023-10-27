@@ -2,8 +2,6 @@ import Footer from "@/components/Footer";
 import XLoginButton from "@/components/button/XLoginButton";
 import Image from "next/image";
 
-export const dynamic = 'force-dynamic'
-
 export default function Index() {
   return (
     <div className="bg-blue-50">

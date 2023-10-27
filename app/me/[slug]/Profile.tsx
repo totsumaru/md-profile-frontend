@@ -11,6 +11,7 @@ type Props = {
   instagram: string
   github: string
   website: string
+  isLogin: boolean
 }
 
 /**
@@ -36,20 +37,22 @@ export default function Profile(props: Props) {
                   {props.displayName}
                 </h3>
 
-                <div className="w-fit flex gap-1">
-                  {/* 編集アイコン */}
-                  <Link
-                    href="../../edit/profile"
-                    className="block w-fit rounded-md bg-white px-2 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:cursor-pointer">
-                    <PencilIcon className="h-5 w-5"/>
-                  </Link>
-                  {/* 共有アイコン */}
-                  <a
-                    href="/edit/share"
-                    className="block w-fit rounded-md bg-white px-2 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:cursor-pointer">
-                    <ArrowUpOnSquareIcon className="h-5 w-5"/>
-                  </a>
-                </div>
+                {props.isLogin && (
+                  <div className="w-fit flex gap-1">
+                    {/* 編集アイコン */}
+                    <Link
+                      href="../../edit/profile"
+                      className="block w-fit rounded-md bg-white px-2 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:cursor-pointer">
+                      <PencilIcon className="h-5 w-5"/>
+                    </Link>
+                    {/* 共有アイコン */}
+                    <a
+                      href="/edit/share"
+                      className="block w-fit rounded-md bg-white px-2 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:cursor-pointer">
+                      <ArrowUpOnSquareIcon className="h-5 w-5"/>
+                    </a>
+                  </div>
+                )}
               </div>
 
               {/* 説明 */}

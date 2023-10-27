@@ -3,7 +3,8 @@ import About from "@/components/About";
 import ProfileTab from "@/components/tab/ProfileTab";
 import { ProfileBackend } from "@/utils/api/api";
 import { GetFindBySlug } from "@/utils/api/getFindBySlug";
-
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
 
 /**
  * ユーザーの公開ページ(me)です
@@ -13,6 +14,9 @@ export default async function Index({
 }: {
   params: { slug: string }
 }) {
+  const supabase = createServerComponentClient({ cookies })
+  const { data: { user } } = await supabase.auth.getUser()
+
   let profile: ProfileBackend | undefined
   try {
     profile = await GetFindBySlug({ slug: slug })
@@ -32,6 +36,7 @@ export default async function Index({
           instagram={profile?.link.instagram || ""}
           github={profile?.link.github || ""}
           website={profile?.link.website || ""}
+          isLogin={!!user}
         />
         <div className="mt-6">
           <ProfileTab/>

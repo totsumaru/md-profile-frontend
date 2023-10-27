@@ -1,5 +1,4 @@
 import { ProfileBackend } from "@/utils/api/api";
-import axios from "axios";
 
 const SampleMD = `
 # 私のプロフィール
@@ -44,9 +43,17 @@ export async function GetFindBySlug({ slug }: Props): Promise<ProfileBackend> {
   const apiUrl = `${process.env.NEXT_PUBLIC_BE_URL}/api/profile/slug/${slug}`;
 
   try {
-    const response = await axios.get<ProfileBackend>(apiUrl);
-    return response.data;
+    const response = await fetch(apiUrl);
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch profile with slug: ${slug}. Status: ${response.status}`);
+    }
+
+    return await response.json();
   } catch (error) {
     throw error;
   }
 }
+
+
+

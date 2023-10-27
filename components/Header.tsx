@@ -2,6 +2,7 @@ import Image from "next/image";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import ToLoginPageButton from "@/components/button/ToLoginPageButton";
+import Link from "next/link";
 
 /**
  * Headerのコンポーネントです
@@ -16,7 +17,7 @@ export default async function Header() {
         <div className="flex justify-between items-center py-3 md:justify-start md:space-x-10">
           {/* 左側(ロゴ) */}
           <div className="flex justify-start lg:w-0 lg:flex-1">
-            <a href="/">
+            <Link href="/">
               <span className="sr-only">Company</span>
               <Image
                 width={100} height={100}
@@ -24,7 +25,7 @@ export default async function Header() {
                 src="/logo.png"
                 alt=""
               />
-            </a>
+            </Link>
           </div>
 
           <div className="flex items-center justify-end md:flex-1 lg:w-0">

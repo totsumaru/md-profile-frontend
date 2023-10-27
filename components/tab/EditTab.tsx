@@ -1,9 +1,10 @@
 import { classNames } from "@/utils/classNames";
+import Link from "next/link";
 
 const tabs = [
-  { name: "プロフィール", href: '/edit/profile', id: "profile" },
-  { name: "概要", href: '/edit/about', id: "about" },
-  { name: "公開設定", href: '/edit/share', id: "share" },
+  { name: "プロフィール", href: '../../edit/profile', id: "profile" },
+  { name: "概要", href: '../../edit/about', id: "about" },
+  { name: "公開設定", href: '../../edit/share', id: "share" },
 ]
 
 type Props = {
@@ -15,7 +16,7 @@ export default function EditTab({ current }: Props) {
     <div className="block border-b border-gray-200">
       <nav className="-mb-px flex space-x-4" aria-label="Tabs">
         {tabs.map((tab) => (
-          <a
+          <Link
             key={tab.name}
             href={tab.href}
             className={classNames(
@@ -27,7 +28,7 @@ export default function EditTab({ current }: Props) {
             aria-current={tab.id === current ? 'page' : undefined}
           >
             {tab.name}
-          </a>
+          </Link>
         ))}
       </nav>
     </div>

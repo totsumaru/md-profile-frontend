@@ -21,6 +21,7 @@ export default function ToLoginPageButton({ isLogin }: Props) {
     setLoading(true)
     await supabase.auth.signOut()
     router.push("/login")
+    router.refresh()
   }
 
   return (

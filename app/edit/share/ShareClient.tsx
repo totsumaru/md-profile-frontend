@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react";
+import Link from "next/link";
 
 type Props = {
   publicUrl: string
@@ -24,7 +25,7 @@ export default function ShareClient({ publicUrl }: Props) {
   return (
     <>
       <div className="flex flex-col sm:flex-row sm:items-center mt-3">
-        <a href={publicUrl} className="text-blue-600 block">{publicUrl}</a>
+        <Link href={publicUrl} className="text-blue-600 block">{publicUrl}</Link>
         <button
           onClick={copyToClipboard}
           className="rounded-md bg-white px-3 py-2 mt-2 sm:mt-0 sm:ml-3 text-sm font-semibold text-gray-900

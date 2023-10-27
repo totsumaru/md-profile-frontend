@@ -46,11 +46,11 @@ export default function Profile(props: Props) {
                       <PencilIcon className="h-5 w-5"/>
                     </Link>
                     {/* 共有アイコン */}
-                    <a
-                      href="/edit/share"
+                    <Link
+                      href="../../edit/share"
                       className="block w-fit rounded-md bg-white px-2 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:cursor-pointer">
                       <ArrowUpOnSquareIcon className="h-5 w-5"/>
-                    </a>
+                    </Link>
                   </div>
                 )}
               </div>

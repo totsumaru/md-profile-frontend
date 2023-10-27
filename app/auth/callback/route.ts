@@ -19,16 +19,15 @@ export async function GET(request: Request): Promise<Response> {
       return NextResponse.redirect(`/login`)
     }
 
-    console.log(session.access_token)
-
     try {
       const res = await PostCreateProfile({ accessToken: session.access_token })
       return NextResponse.redirect(`${requestUrl.origin}/me/${res.slug}`)
     } catch (error) {
-      // console.error(error)
       return new Response("Error occurred", { status: 500 })
     }
   }
+
+  console.log("3です")
 
   return NextResponse.redirect(`${requestUrl.origin}`)
 }

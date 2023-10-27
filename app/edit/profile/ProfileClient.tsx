@@ -5,6 +5,8 @@ import React, { ChangeEvent, useRef, useState } from "react";
 import { PostProfileProps, PostUpdateProfile } from "@/utils/api/postUpdateProfile";
 import SuccessToast from "@/components/notice/SuccessToast";
 import ErrorToast from "@/components/notice/ErrorToast";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 type Props = {
   accessToken: string
@@ -22,6 +24,7 @@ type Props = {
  * プロフィール編集ページのClientコンポーネントです
  */
 export default function ProfileClient(props: Props) {
+  const router = useRouter()
   const [avatarUrl, setAvatarUrl] = useState<string>(props.imageUrl)
   const [avatarFile, setAvatarFile] = useState<File | null>(null)
   const [displayName, setDisplayName] = useState<string>(props.displayName)
@@ -111,6 +114,7 @@ export default function ProfileClient(props: Props) {
       }
       await PostUpdateProfile(req)
       setSuccess(true)
+      router.refresh()
     } catch (e) {
       console.error(e)
       setError(true)
@@ -283,12 +287,12 @@ export default function ProfileClient(props: Props) {
           </button>
 
           {/* 戻る */}
-          <a
-            href={`/me/${slug}`}
+          <Link
+            href={`../../me/${slug}`}
             className="ml-3 px-3.5 py-2.5 text-sm font-semibold text-gray-800"
           >
             戻る
-          </a>
+          </Link>
         </div>
       </form>
     </>

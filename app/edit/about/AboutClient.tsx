@@ -8,6 +8,8 @@ import { PostUpdateMarkdown } from "@/utils/api/postUpdateMarkdown";
 import SuccessToast from "@/components/notice/SuccessToast";
 import ErrorToast from "@/components/notice/ErrorToast";
 import { PostUploadImage } from "@/utils/api/postUploadImage";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 type Props = {
   accessToken: string
@@ -19,6 +21,7 @@ type Props = {
  * Aboutの編集ページのクライアントコンポーネントです
  */
 export default function AboutClient({ accessToken, defaultValue, slug }: Props) {
+  const router = useRouter()
   const [markdown, setMarkdown] = useState<string>(defaultValue)
   const [isEditor, setIsEditor] = useState<boolean>(true)
   const [imageLoading, setImageLoading] = useState<boolean>(false)
@@ -77,6 +80,7 @@ export default function AboutClient({ accessToken, defaultValue, slug }: Props) 
         markdown: markdown,
       })
       setSuccess(true)
+      router.refresh()
     } catch (e) {
       console.error(e)
       setError(true)
@@ -169,9 +173,9 @@ export default function AboutClient({ accessToken, defaultValue, slug }: Props) 
           </button>
 
           {/* 戻る */}
-          <a href={`/me/${slug}`} className="ml-3 px-3.5 py-2.5 text-sm font-semibold text-gray-800">
+          <Link href={`../../me/${slug}`} className="ml-3 px-3.5 py-2.5 text-sm font-semibold text-gray-800">
             戻る
-          </a>
+          </Link>
         </div>
       </form>
     </>

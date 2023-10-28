@@ -22,7 +22,7 @@ const textWithLinks = (text: string): React.ReactNode[] => {
 
   return parts.map((part, index) => {
     if (urlRegex.test(part)) {
-      return <a href={part} target="_blank" rel="noopener noreferrer" className="text-blue-600" key={index}>{part}</a>;
+      return <a href={part} target="_blank" rel="noopener noreferrer" className="text-blue-600 cursor-pointer" key={index}>{part}</a>;
     }
     return part;
   });

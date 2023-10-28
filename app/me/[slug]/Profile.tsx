@@ -2,6 +2,7 @@ import SnsIcon from "@/components/SnsIcon";
 import { ArrowUpOnSquareIcon, PencilIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
+import React from "react";
 
 type Props = {
   imageUrl: string
@@ -13,6 +14,20 @@ type Props = {
   website: string
   isLogin: boolean
 }
+
+// 正規表現でURLを検出し、Reactの要素の配列として返す関数
+const textWithLinks = (text: string): React.ReactNode[] => {
+  const urlRegex = /(https?:\/\/[^\s]+)/g;
+  const parts = text.split(urlRegex);
+
+  return parts.map((part, index) => {
+    if (urlRegex.test(part)) {
+      return <a href={part} target="_blank" rel="noopener noreferrer" className="text-blue-600" key={index}>{part}</a>;
+    }
+    return part;
+  });
+};
+
 
 /**
  * プロフィールです
@@ -57,7 +72,7 @@ export default function Profile(props: Props) {
 
               {/* 説明 */}
               <p className="mt-4 text-base leading-7 text-gray-600">
-                {props.introduction}
+                {textWithLinks(props.introduction)}
               </p>
 
               {/* SNSアイコン */}

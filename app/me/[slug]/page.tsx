@@ -24,9 +24,13 @@ export async function generateMetadata({
 
   return {
     title: profile?.display_name,
-    description: `Profio｜${profile?.introduction}`
+    description: `Profio｜${profile?.introduction}`,
     // openGraph: {
-    //   images: ['/some-specific-page-image.jpg', ...previousImages],
+    //   images: {
+    //     url: "",
+    //     width: 0,
+    //     height: 0,
+    //   },
     // },
   }
 }

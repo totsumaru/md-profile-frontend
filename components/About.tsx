@@ -1,4 +1,6 @@
-import React from 'react';
+"use client"
+
+import React, { createContext, useContext } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import remarkBreaks from 'remark-breaks';
@@ -12,6 +14,15 @@ type Props = {
  * MarkdownをHTMLに変換します
  */
 export default function About({ markdownText }: Props) {
+
+  // Contextの作成
+  const CodeBlockContext = createContext(false);
+
+  // Hookの作成
+  function useIsInsideCodeBlock() {
+    return useContext(CodeBlockContext);
+  }
+
   return (
     <ReactMarkdown
       remarkPlugins={[remarkGfm, remarkBreaks]}
@@ -56,6 +67,36 @@ export default function About({ markdownText }: Props) {
               alt={cleanAlt || ""}
               className={isHalf ? "w-1/2 mt-3" : "w-full mt-3"}
             />
+          );
+        },
+        pre: ({ children }) => {
+          const blockCodeClasses = "bg-gray-200 mt-3 p-3 rounded-md text-white overflow-x-auto font-mono text-sm";
+
+          return (
+            <CodeBlockContext.Provider value={true}>
+              <pre className={blockCodeClasses}>
+                {children}
+              </pre>
+            </CodeBlockContext.Provider>
+          );
+        },
+        code: ({ children, ...props }) => {
+          const isInsidePre = useIsInsideCodeBlock();
+
+          // コードブロック
+          if (isInsidePre) {
+            return (
+              <code className="text-gray-800 rounded-md overflow-x-auto font-mono text-sm leading-relaxed" {...props}>
+                {children}
+              </code>
+            );
+          }
+
+          // インラインコード
+          return (
+            <code className="bg-gray-200 px-2 py-1 text-gray-800 rounded-md text-sm" {...props}>
+              {children}
+            </code>
           );
         },
         table: ({ node, ...props }) => (

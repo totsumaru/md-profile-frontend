@@ -6,6 +6,7 @@ import { GetFindBySlug } from "@/utils/api/getFindBySlug";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { Metadata } from "next";
+import NotFound404 from "@/components/error/NotFound404";
 
 export const revalidate = 100
 
@@ -51,6 +52,7 @@ export default async function Index({
     profile = await GetFindBySlug({ slug: slug })
   } catch (e) {
     console.error("データを取得できません", e)
+    return <NotFound404/>
   }
 
   return (

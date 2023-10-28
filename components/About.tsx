@@ -1,6 +1,6 @@
 "use client"
 
-import React, { createContext, useContext } from 'react';
+import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import remarkBreaks from 'remark-breaks';
@@ -16,15 +16,6 @@ type Props = {
  * MarkdownをHTMLに変換します
  */
 export default function About({ markdownText }: Props) {
-
-  // Contextの作成
-  const CodeBlockContext = createContext(false);
-
-  // Hookの作成
-  function useIsInsideCodeBlock() {
-    return useContext(CodeBlockContext);
-  }
-
   return (
     <ReactMarkdown
       remarkPlugins={[remarkGfm, remarkBreaks]}
@@ -74,7 +65,9 @@ export default function About({ markdownText }: Props) {
         pre: PreComponent,
         code: CodeComponent,
         table: ({ node, ...props }) => (
-          <table className="min-w-full divide-y divide-gray-300 border border-gray-300" {...props} />
+          <div className="overflow-x-auto mt-4">
+            <table className="w-full min-w-full divide-y divide-gray-300 border border-gray-300" {...props} />
+          </div>
         ),
         thead: ({ node, ...props }) => (
           <thead className="bg-gray-50" {...props} />

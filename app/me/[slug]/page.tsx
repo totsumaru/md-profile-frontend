@@ -5,8 +5,31 @@ import { ProfileBackend } from "@/utils/api/api";
 import { GetFindBySlug } from "@/utils/api/getFindBySlug";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
+import { Metadata } from "next";
 
 export const revalidate = 100
+
+export async function generateMetadata({
+  params: { slug }
+}: {
+  params: { slug: string }
+}): Promise<Metadata> {
+  // fetch data
+  let profile: ProfileBackend | undefined
+  try {
+    profile = await GetFindBySlug({ slug: slug })
+  } catch (e) {
+    console.error("データを取得できません", e)
+  }
+
+  return {
+    title: profile?.display_name,
+    description: `Profio｜${profile?.introduction}`
+    // openGraph: {
+    //   images: ['/some-specific-page-image.jpg', ...previousImages],
+    // },
+  }
+}
 
 /**
  * ユーザーの公開ページ(me)です

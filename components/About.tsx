@@ -70,7 +70,7 @@ export default function About({ markdownText }: Props) {
           );
         },
         pre: ({ children }) => {
-          const blockCodeClasses = "bg-gray-200 mt-3 p-3 rounded-md text-white overflow-x-auto font-mono text-sm";
+          const blockCodeClasses = "bg-gray-200 mt-3 p-4 rounded-md text-white overflow-x-auto font-mono text-sm";
 
           return (
             <CodeBlockContext.Provider value={true}>

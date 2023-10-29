@@ -23,13 +23,20 @@ export async function generateMetadata({
     console.error("データを取得できません", e)
   }
 
+  const ogpImageURL = `${process.env.NEXT_PUBLIC_FE_URL}/ogp?slug=${slug}`
+
   return {
     title: profile?.display_name,
     description: `${profile?.introduction} / Profio`,
     openGraph: {
       images: {
-        url: `${process.env.NEXT_PUBLIC_FE_URL}/ogp?slug=${slug}`,
+        url: ogpImageURL,
       },
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: profile?.display_name,
+      description: profile?.introduction,
     },
   }
 }

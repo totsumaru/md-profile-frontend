@@ -23,7 +23,7 @@ export default function CodeComponent({ children, ...props }: any) {
 
   // インラインコード
   return (
-    <code className="bg-gray-100 px-2 py-1 text-gray-800 rounded-md text-sm" {...props}>
+    <code className="bg-gray-200 px-2 py-1 text-gray-800 rounded-md text-sm" {...props}>
       {children}
     </code>
   );

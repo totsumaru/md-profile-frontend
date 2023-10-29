@@ -25,14 +25,12 @@ export async function generateMetadata({
 
   return {
     title: profile?.display_name,
-    description: `Profio｜${profile?.introduction}`,
-    // openGraph: {
-    //   images: {
-    //     url: "",
-    //     width: 0,
-    //     height: 0,
-    //   },
-    // },
+    description: `${profile?.introduction} / Profio`,
+    openGraph: {
+      images: {
+        url: `${process.env.NEXT_PUBLIC_FE_URL}/ogp?slug=${slug}`,
+      },
+    },
   }
 }
 

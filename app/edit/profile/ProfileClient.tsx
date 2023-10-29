@@ -202,7 +202,7 @@ export default function ProfileClient(props: Props) {
             className="flex items-center border border-gray-300 rounded-lg overflow-hidden">
             <span
               className="inline-block px-2.5 text-gray-900 text-sm border-gray-300">
-              https://hello.com/me/
+              https://profio.com/me/
             </span>
             <input
               type="text"

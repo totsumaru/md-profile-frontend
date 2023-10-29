@@ -72,7 +72,7 @@ export default async function Index({
           instagram={profile?.link.instagram || ""}
           github={profile?.link.github || ""}
           website={profile?.link.website || ""}
-          isLogin={!!user}
+          loginIsMe={profile.id === user?.id}
         />
         <div className="mt-6">
           <ProfileTab/>

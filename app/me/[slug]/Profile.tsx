@@ -12,7 +12,7 @@ type Props = {
   instagram: string
   github: string
   website: string
-  isLogin: boolean
+  loginIsMe: boolean
 }
 
 // 正規表現でURLを検出し、Reactの要素の配列として返す関数
@@ -22,7 +22,8 @@ const textWithLinks = (text: string): React.ReactNode[] => {
 
   return parts.map((part, index) => {
     if (urlRegex.test(part)) {
-      return <a href={part} target="_blank" rel="noopener noreferrer" className="text-blue-600 cursor-pointer" key={index}>{part}</a>;
+      return <a href={part} target="_blank" rel="noopener noreferrer" className="text-blue-600 cursor-pointer"
+                key={index}>{part}</a>;
     }
     return part;
   });
@@ -52,7 +53,7 @@ export default function Profile(props: Props) {
                   {props.displayName}
                 </h3>
 
-                {props.isLogin && (
+                {props.loginIsMe && (
                   <div className="w-fit flex gap-1">
                     {/* 編集アイコン */}
                     <Link

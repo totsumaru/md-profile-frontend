@@ -27,7 +27,6 @@ export async function GET(request: Request): Promise<Response> {
     }
   }
 
-  console.log("3です")
 
   return NextResponse.redirect(`${requestUrl.origin}`)
 }
